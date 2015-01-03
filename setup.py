@@ -2,12 +2,12 @@ from setuptools import find_packages
 from setuptools import setup
 
 install_requires = [
-    'sentry>=6.4.3',
+    'sentry>=7.0.1',
 ]
 
 setup(
     name='sentry-subscriptions',
-    version='0.2.3',
+    version='0.2.4',
     author='John Lynn',
     author_email='jlynn@hearsaycorp.com',
     package_dir={'': 'src'},
