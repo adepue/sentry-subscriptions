@@ -1,5 +1,5 @@
 from django import forms
-from django.core.validators import email_re
+from django.utils.html import simple_email_re as email_re
 from django.core.validators import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from sentry.plugins.sentry_mail.models import MailPlugin
