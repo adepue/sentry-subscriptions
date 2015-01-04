@@ -3,6 +3,7 @@ from setuptools import setup
 
 install_requires = [
     'sentry>=7.0.1',
+    'mock'
 ]
 
 setup(

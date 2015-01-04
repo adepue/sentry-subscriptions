@@ -110,7 +110,7 @@ class SubscriptionsPlugin(MailPlugin):
         return notifications
 
     def _send_mail(self, subject, template=None, html_template=None, body=None,
-                   project=None, headers=None, context=None, fail_silently=False):
+                   project=None, headers=None, context=None, fail_silently=False, group=None):
 
         subject_prefix = self.get_option('subject_prefix', project) or self.subject_prefix
 
@@ -135,9 +135,14 @@ class SubscriptionsPlugin(MailPlugin):
         if not self.is_configured(group.project):
             return
 
+        import mock
+        notification = mock.MagicMock()
+        notification.event = event
+        notification.rule = None
+
         if is_new or self.should_notify(group, event):
             try:
                 self._send_to = self.get_matches(event)
-                self.notify_users(group, event)
+                self.notify(notification)
             finally:
                 self._send_to = []
