@@ -86,11 +86,7 @@ class SubscriptionsPlugin(MailPlugin):
     def is_configured(self, project, **kwargs):
         return bool(self.get_option('subscriptions', project))
 
-    def should_notify(self, event, is_new):
-
-        if is_new:
-            return True
-
+    def should_notify(self, group, event):
         if event.group:
             count = event.group.times_seen
             if count <= 100 and count % 10 == 0:
@@ -139,7 +135,7 @@ class SubscriptionsPlugin(MailPlugin):
         if not self.is_configured(group.project):
             return
 
-        if self.should_notify(event, is_new):
+        if is_new or self.should_notify(group, event):
             try:
                 self._send_to = self.get_matches(event)
                 self.notify_users(group, event)
